@@ -1,0 +1,32 @@
+{
+  "name": "legal-bots",
+  "version": "1.0.0",
+  "description": "Ecossistema de bots para extrair dados e cópias dos principais sistema judiciários brasileiro.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "npx tsc && node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielms-castro/legal-bots.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabrielms-castro/legal-bots/issues"
+  },
+  "homepage": "https://github.com/gabrielms-castro/legal-bots#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
+  }
+}
