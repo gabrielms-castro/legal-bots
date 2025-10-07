@@ -6,14 +6,15 @@ dotenv.config();
 // AINDA ESTÁ MUITO RÍGIDO PARA QUE OUTRAS PESSOAS FORA DA MINHA REALIDADE UTILIZEM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const projectRoot = path.resolve(__dirname, '..');
-export const extensionDir = path.join(projectRoot, 'src', 'extensoes', 'presto_0.70'); // carregar de forma dinâmica futuramente
+export const projectRoot = path.resolve(__dirname, '..');
+export const extensionsDir = path.join(projectRoot, 'extensoes')
 export const userDataDir = path.join(projectRoot, '.temp', 'user-data');
-export const envs = loadEnv();
+
 
 type SystemCredentials = {
   username: string;
   password: string;
+  pin?: string;
 }
 
 type Envs = {
@@ -44,18 +45,28 @@ function getEnv(name: string) :string | undefined {
 function loadSystemCredentials(systemName: string): SystemCredentials[] {
   const credentials: SystemCredentials[] = [];
   let i = 1;
+
   while (true) {
     const username = getEnv(`${systemName}_USUARIO_${i}`);
     const password = getEnv(`${systemName}_SENHA_${i}`);
-
+    
     if (!username || !password) break;
+    
+    if (systemName.toLowerCase() === 'presto') {
+      const pin = getEnv(`${systemName}_PIN_${i}`);
+      credentials.push({ username, password, pin });
 
-    credentials.push({ username, password });
+    } else {
+      credentials.push({ username, password });
+    }
+
     i++;
   }
+
   return credentials
 }
 
+// alterar futuramente. cada classe chama sua própria config/credencial
 function loadEnv(): Envs {
   return {
     totpApiEndpoint: requireEnv('TOTP_API_ENDPOINT'),
@@ -69,3 +80,4 @@ function loadEnv(): Envs {
 }
 
 
+export const envs = loadEnv();

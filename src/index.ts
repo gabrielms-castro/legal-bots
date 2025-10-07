@@ -1,17 +1,15 @@
-import { chromium } from '@playwright/test';
-import { auth2FA, loginComPresto, loginComSenha, pesquisarProcesso } from './login.js';
-import { envs } from './config.js';
-import { loginPresto } from './servicos/presto.js';
-import fs from 'node:fs';
+import { extensionsDir, envs } from './config.js';
+import { displayExtensions } from './servicos/extensoes.js';
 
 async function run() {
+    console.log(envs)
     // const browser = await chromium.launch({ headless: false });
     // const context = await browser.newContext({ viewport: { width: 1366, height: 768 }});
     // const page = await context.newPage();
     
     // await loginComSenha(page, {
-        //     loginURL: 'https://esaj.tjsp.jus.br/sajcas/login',
-        //     userSelector: '#usernameForm',
+    //         loginURL: 'https://esaj.tjsp.jus.br/sajcas/login',
+    //         userSelector: '#usernameForm',
     //     passSelector: '#passwordForm',
     //     submitSelector: '#pbEntrar',
     // username: process.env.ESAJ_USUARIO_1 as string,
@@ -20,27 +18,25 @@ async function run() {
     // })
 
     // login presto
-    const userDataDir = './.temp/user-data'
-    const extensionPath = 'C:/Users/gcastro/AppData/Local/Google/Chrome/User Data/Default/Extensions/ajgkdaibodfheidcpeifpdhaopjbpneo/0.70.0_0';
-    fs.mkdirSync(userDataDir, { recursive: true });
+    // fs.mkdirSync(userDataDir, { recursive: true });
     
-    const context = await chromium.launchPersistentContext(userDataDir, {
-        headless: false,
-        channel: 'chromium', // ou 'chromium'
-        args: [
-        `--disable-extensions-except=${extensionPath}`,
-        `--load-extension=${extensionPath}`,
-        ],
-    });
-    const page = await context.newPage();
+    // const context = await chromium.launchPersistentContext(userDataDir, {
+    //     headless: false,
+    //     channel: 'chromium', // ou 'chromium'
+    //     args: [
+    //     `--disable-extensions-except=${extensionPath}`,
+    //     `--load-extension=${extensionPath}`,
+    //     ],
+    // });
+    // const page = await context.newPage();
 
-    await loginPresto(page, {
-        username: envs.prestoUsuario1,
-        password: envs.prestoSenha1,
-    })
+    // await loginPresto(page, {
+    //     username: envs.prestoUsuario1,
+    //     password: envs.prestoSenha1,
+    // })
 
-    await page.goto('https://eproc1g.tjrs.jus.br/eproc/externo_controlador.php?acao=principal', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(10000);
+    // await page.goto('https://eproc1g.tjrs.jus.br/eproc/externo_controlador.php?acao=principal', { waitUntil: 'domcontentloaded' });
+    // await page.waitForTimeout(10000);
     
     // await loginComSenha(page, {
     //     loginURL: 'https://eproc1g.tjrs.jus.br/eproc/externo_controlador.php?acao=principal',
@@ -58,7 +54,7 @@ async function run() {
     //     pos2FASelector: '#divInfraBarraLocalizacao > div > h1'
     // });
 
-    await loginComPresto('https://eproc1g.tjrs.jus.br/eproc/externo_controlador.php?acao=principal');
+    // await loginComPresto('https://eproc1g.tjrs.jus.br/eproc/externo_controlador.php?acao=principal');
     // console.log("Logado com sucesso");
 
     // await pesquisarProcesso(page);
@@ -70,6 +66,8 @@ async function run() {
 
     // await page.waitForTimeout(2000);
     // await browser.close();
+    const result = await displayExtensions(extensionsDir)
+    console.log(result)
 }
 
 run();
