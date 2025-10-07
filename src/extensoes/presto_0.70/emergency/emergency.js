@@ -1,0 +1,1 @@
+import './target/scala-3.3.1/presto-emergency-fastopt/main.js'

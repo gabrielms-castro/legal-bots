@@ -1,0 +1,49 @@
+{
+   "action": {
+      "default_popup": "./popup/popup.html"
+   },
+   "background": {
+      "service_worker": "./background/target/scala-3.3.1/presto-background-fastopt/main.js"
+   },
+   "content_scripts": [ {
+      "all_frames": true,
+      "css": [ "./css/public.css", "./css/public-static.css" ],
+      "js": [ "./content/target/scala-3.3.1/presto-content-fastopt/main.js" ],
+      "matches": [ "\u003Call_urls>" ],
+      "run_at": "document_end",
+      "world": "ISOLATED"
+   }, {
+      "all_frames": true,
+      "css": [ "./css/public.css", "./css/public-static.css" ],
+      "js": [ "./external/target/scala-3.3.1/presto-external-fastopt/main.js" ],
+      "matches": [ "\u003Call_urls>" ],
+      "run_at": "document_end",
+      "world": "MAIN"
+   } ],
+   "description": "Presto Credenciais Seguras",
+   "externally_connectable": {
+      "ids": [ "*" ],
+      "matches": [ "\u003Call_urls>" ]
+   },
+   "host_permissions": [ "\u003Call_urls>" ],
+   "icons": {
+      "128": "logo-avatar-128x128.png",
+      "16": "logo-avatar-16x16.png",
+      "32": "logo-avatar-32x32.png",
+      "48": "logo-avatar-48x48.png"
+   },
+   "incognito": "split",
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn45UGz+5gUC9qfJROLgjaadEfcMXNonMO6QB1QDldhs63F2RnX37XnM5AXnGLDyLi+crlKO8L2xwJ4yzM5viikciKAaz+8qy7DZ7x4X0Qc79OEHBdy34kmD5qP3OzQg06ZpaH/+CPx6ZmF6hvv9CaZ9zosy7Ir82yqwmg+WJv+HBhf5ei6eW6KW/4dRH77P9TQGRbwsBv+EPFXPzxlXbyU1QPqs4TJfJRNqOAL67ovjU/2gnhJlpXfxKgCY6Q4XCnUJj/NPV4XGpitWI916oFFE7+hmucOPkLgnBwCOLA7KsIETg9c5VqjFM49CJTXAii9oJE4lPcb2dx/T7PshU9wIDAQAB",
+   "manifest_version": 3,
+   "name": "Presto",
+   "permissions": [ "activeTab", "cookies", "clipboardWrite", "management", "storage" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "0.70.0",
+   "web_accessible_resources": [ {
+      "matches": [ "\u003Call_urls>" ],
+      "resources": [ "*.js.map" ]
+   }, {
+      "matches": [ "\u003Call_urls>" ],
+      "resources": [ "emergency/emergency.html", "css/*" ]
+   } ]
+}
