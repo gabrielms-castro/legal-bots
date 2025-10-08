@@ -9,8 +9,8 @@ type _2FAOptions = {
 }
 
 export async function auth2FA(page: Page, opts: _2FAOptions) {
-    const { auth2FASelector, submitSelector, pos2FASelector } = opts;
-    const TOTPCode = await fectchTOTPCode('EPROC RS');
+    const { system, auth2FASelector, submitSelector, pos2FASelector } = opts;
+    const TOTPCode = await fectchTOTPCode(system);
     await page.fill(auth2FASelector, TOTPCode['totp_code']);
     await page.click(submitSelector);
     await page.waitForSelector(pos2FASelector, { timeout: 20000 });

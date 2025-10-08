@@ -13,7 +13,12 @@ export async function displayExtensions(extensionsDirectory: string): Promise<st
     }
 }
 
-export function loadExtension() {
+export async function loadExtension(extensionName: string, extensionsDir: string) {
+    const availableExtensions: string[] = await displayExtensions(extensionsDir);
+
+    if (availableExtensions.includes(extensionName)) {
+        return `${extensionsDir}/${extensionName}`;
+    }
 }
 
 function copyExtensionDir() {

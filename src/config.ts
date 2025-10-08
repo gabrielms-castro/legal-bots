@@ -42,7 +42,7 @@ function getEnv(name: string) :string | undefined {
   return process.env[name];
 }
 
-function loadSystemCredentials(systemName: string): SystemCredentials[] {
+export function loadSystemCredentials(systemName: string): SystemCredentials[] {
   const credentials: SystemCredentials[] = [];
   let i = 1;
 
