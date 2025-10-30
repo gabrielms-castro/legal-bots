@@ -27,7 +27,7 @@ export class Eproc {
     system: string;
     
     constructor(private options: CreateContextOptions, system: string) {
-        this.system = system
+        this.system = system.toLowerCase()
         const sys = this.getSystem();
         this.systemURL = sys.url;
         this.systemOTP = sys.otpServiceName
@@ -39,13 +39,13 @@ export class Eproc {
 
     private getSystem() {
         switch (this.system) {
-            case 'TJ_SP': return { url: EprocURLs.TJ_SP, otpServiceName: 'EPROC SP' };
-            case 'TJ_SC': return { url:EprocURLs.TJ_SC, otpServiceName: 'EPROC SC' }
-            case 'TJ_RS': return { url: EprocURLs.TJ_RS, otpServiceName: 'EPROC RS' }
-            case 'TRF04': return { url: EprocURLs.TRF04, otpServiceName: 'EPROC TRF04' }
-            case 'TRF04_RS': return { url: EprocURLs.TRF04_RS, otpServiceName: 'EPROC TRF04 RS' }
-            case 'TRF04_SC': return { url: EprocURLs.TRF04_SC, otpServiceName: 'EPROC TRF04 SC' }
-            case 'TRF04_PR': return { url: EprocURLs.TRF04_PR, otpServiceName: 'EPROC TRF04 SP' }
+            case 'tj_sp': return { url: EprocURLs.TJ_SP, otpServiceName: 'EPROC SP' };
+            case 'tj_sc': return { url:EprocURLs.TJ_SC, otpServiceName: 'EPROC SC' }
+            case 'tj_rs': return { url: EprocURLs.TJ_RS, otpServiceName: 'EPROC RS' }
+            case 'trf04': return { url: EprocURLs.TRF04, otpServiceName: 'EPROC TRF04' }
+            case 'trf04_rs': return { url: EprocURLs.TRF04_RS, otpServiceName: 'EPROC TRF04 RS' }
+            case 'trf04_sc': return { url: EprocURLs.TRF04_SC, otpServiceName: 'EPROC TRF04 SC' }
+            case 'trf04_pr': return { url: EprocURLs.TRF04_PR, otpServiceName: 'EPROC TRF04 SP' }
             default: throw new Error('Sistema desconhecido')
         }
     }

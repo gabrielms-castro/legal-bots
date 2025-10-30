@@ -11,13 +11,14 @@ async function run() {
     const args = process.argv.slice(2);
     const sistema = args[0]
 
-    const eproc = new Eproc({
-        headless: false,
-        extensionPath: await loadExtension('presto', extensionsDir),
-        browserType: 'chromium',
-        userDataDir: userDataDir
-    },
-    sistema
+    const eproc = new Eproc(
+        {
+            headless: false,
+            extensionPath: await loadExtension('presto', extensionsDir),
+            browserType: 'chromium',
+            userDataDir: userDataDir
+        },
+        sistema
     );
 
     await eproc.init();
